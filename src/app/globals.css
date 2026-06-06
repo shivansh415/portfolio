@@ -1,26 +1,732 @@
+/* src/app/globals.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Yatra+One&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=IM+Fell+English+SC&display=swap');
 @import "tailwindcss";
 
+/* ── Tailwind v4 Theme Tokens (CSS-first config; no tailwind.config.ts) ── */
+@theme {
+  --color-paper:        #E5D0A0;
+  --color-paper-dark:   #C4A76B;
+  --color-ink:          #2A1B12;
+  --color-brown:        #4A2F1B;
+  --color-gold:         #B98A45;
+  --color-gold-light:   #D4A855;
+  --color-burn:         #FF8A00;
+  --color-burn-dark:    #B44500;
+  --color-site-bg:      #0F0B08;
+  --color-wax:          #5C1A1A;
+
+  --font-hindi:      "Yatra One", serif;
+  --font-cinzel:     "Cinzel", serif;
+  --font-cormorant:  "Cormorant Garamond", serif;
+  --font-devanagari: "Noto Sans Devanagari", sans-serif;
+  --font-fell:       "IM Fell English SC", serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Core Palette ── */
+  --paper:          #E5D0A0;
+  --paper-dark:     #C4A76B;
+  --paper-deeper:   #B8996A;
+  --ink:            #2A1B12;
+  --brown:          #4A2F1B;
+  --gold:           #B98A45;
+  --gold-light:     #D4A855;
+  --burn:           #FF8A00;
+  --burn-dark:      #B44500;
+  --bg:             #0F0B08;
+  --wax:            #5C1A1A;
+  --wax-dark:       #3D0F0F;
+
+  /* ── Typography ── */
+  --font-hindi:       'Yatra One', serif;
+  --font-cinzel:      'Cinzel', serif;
+  --font-cormorant:   'Cormorant Garamond', serif;
+  --font-devanagari:  'Noto Sans Devanagari', sans-serif;
+  --font-fell:        'IM Fell English SC', serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html, body {
+  overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-devanagari);
 }
+
+/* ── Manuscript Base ── */
+.manuscript {
+  background-color: var(--paper);
+  background-image: url('/assets/shared/paper-bg.png');
+  background-size: cover;
+  background-repeat: repeat;
+  position: relative;
+  /* Burn glow around the parchment — visible on all screen sizes */
+  box-shadow:
+    inset 0 0 80px rgba(255,138,0,0.25),
+    inset 0 -60px 80px rgba(180,60,0,0.2),
+    inset 0 60px 80px rgba(180,60,0,0.2),
+    inset 40px 0 70px rgba(180,60,0,0.15),
+    inset -40px 0 70px rgba(180,60,0,0.15),
+    0 0 60px rgba(255,138,0,0.15),
+    0 0 120px rgba(180,60,0,0.1);
+}
+
+/* ── Burnt Edges — Desktop ── */
+.burnt-edge-top,
+.burnt-edge-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background-image: url('/assets/shared/burnt-edge-desktop.png');
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+.burnt-edge-top    { top: 0; }
+.burnt-edge-bottom { bottom: 0; transform: rotate(180deg); }
+
+/* ── Burnt Edges — Left/Right for Desktop ── */
+.burnt-edge-left,
+.burnt-edge-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  pointer-events: none;
+  z-index: 5;
+}
+.burnt-edge-left {
+  left: 0;
+  background: linear-gradient(to right,
+    rgba(15,11,8,1) 0%,
+    rgba(30,18,10,0.7) 15%,
+    rgba(60,30,10,0.25) 30%,
+    rgba(180,60,0,0.06) 50%,
+    transparent 70%
+  );
+}
+.burnt-edge-right {
+  right: 0;
+  background: linear-gradient(to left,
+    rgba(15,11,8,1) 0%,
+    rgba(30,18,10,0.7) 15%,
+    rgba(60,30,10,0.25) 30%,
+    rgba(180,60,0,0.06) 50%,
+    transparent 70%
+  );
+}
+
+/* ── Burnt Edge — Bottom shadow matching left/right sides ── */
+.burnt-edge-bottom-gradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 5;
+  background: linear-gradient(to top,
+    rgba(15,11,8,1) 0%,
+    rgba(30,18,10,0.7) 15%,
+    rgba(60,30,10,0.25) 30%,
+    rgba(180,60,0,0.06) 50%,
+    transparent 70%
+  );
+}
+
+/* ── Sacred Geometry Overlay ── */
+.geometry-overlay {
+  position: absolute;
+  background-image: url('/assets/shared/geometry.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Sanskrit Overlay ── */
+.sanskrit-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/shared/sanskrit-overlay.png');
+  background-size: 400px;
+  background-repeat: repeat;
+  opacity: 0.10;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+
+/* ── Section Header ── */
+.section-hindi {
+  font-family: var(--font-devanagari);
+  color: var(--brown);
+  line-height: 1.4;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+.section-english {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.2;
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+}
+.section-label {
+  font-family: var(--font-fell);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brown);
+}
+
+/* ── Gold Ornamental Divider ── */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gold);
+  font-family: var(--font-cinzel);
+  font-size: 0.85rem;
+}
+.ornament::before,
+.ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+/* ── Dark Button ── */
+.btn-dark {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-cinzel);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid rgba(185,138,69,0.3);
+  border-radius: 30px;
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-dark:hover {
+  background: var(--brown);
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(185,138,69,0.2);
+}
+
+/* ── CTA Arrow Link ── */
+.cta-link {
+  font-family: var(--font-fell);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cta-link .arrow {
+  transition: transform 0.3s ease;
+}
+.cta-link:hover .arrow {
+  transform: translateX(6px);
+}
+
+/* ── Wax Seal ── */
+.wax-seal {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #8B2020, #3D0F0F);
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.5), inset 0 1px 3px rgba(255,200,100,0.2);
+}
+.wax-seal img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(1.3) sepia(0.2);
+}
+
+/* ── Burnt Hole Container ── */
+.burnt-hole {
+  position: relative;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 138, 0, 0.5))
+    drop-shadow(0 0 20px rgba(180, 60, 0, 0.3));
+}
+
+.burnt-hole-mask {
+  -webkit-mask-image: url('/assets/shared/burnt-hole-mask.svg');
+  mask-image: url('/assets/shared/burnt-hole-mask.svg');
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.burnt-hole-charred-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: multiply;
+  background: radial-gradient(ellipse at center,
+    transparent 55%,
+    rgba(42, 27, 18, 0.45) 75%,
+    rgba(15, 11, 8, 0.95) 95%
+  );
+}
+
+/* ── Project Card ── */
+.project-card {
+  background: #1A0F0A;
+  border: 1px solid rgba(185,138,69,0.25);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(185,138,69,0.6);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.project-card .card-footer {
+  background: #1A0F0A;
+  border-top: 1px solid rgba(185,138,69,0.15);
+  padding: 18px 20px;
+}
+.project-card .card-number {
+  font-family: var(--font-cinzel);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+.project-card .card-title-hindi {
+  font-family: var(--font-devanagari);
+  font-size: 0.8rem;
+  color: rgba(229,208,160,0.6);
+  line-height: 1.3;
+}
+.project-card .card-title-en {
+  font-family: var(--font-cinzel);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--paper);
+}
+.project-card .card-category {
+  font-size: 0.7rem;
+  color: rgba(229,208,160,0.6);
+  font-family: var(--font-fell);
+  letter-spacing: 0.1em;
+}
+
+/* ── Archive Record Card ── */
+.archive-record-card {
+  position: relative;
+  background: rgba(229,208,160,0.35);
+  background-image: url('/assets/shared/paper-bg.png');
+  background-size: cover;
+  border: 1px solid rgba(185,138,69,0.3);
+  border-radius: 3px;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.5s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.5s ease;
+  box-shadow:
+    0 4px 24px rgba(0,0,0,0.15),
+    inset 0 0 40px rgba(180,60,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.archive-record-card::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  bottom: 3px;
+  left: 48px; /* 45px mobile binder strip + 3px inset */
+  border: 1px dashed rgba(185,138,69,0.15);
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .archive-record-card::before {
+    left: 63px; /* 60px desktop binder strip + 3px inset */
+  }
+}
+
+.archive-record-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(185,138,69,0.5);
+  box-shadow:
+    0 16px 48px rgba(0,0,0,0.25),
+    0 0 30px rgba(255,138,0,0.08),
+    inset 0 0 40px rgba(180,60,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* Rope binding between content and reveal */
+.archive-rope-binding {
+  position: relative;
+  width: 32px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.archive-rope-binding::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(139,90,43,0.5) 0px,
+    rgba(139,90,43,0.5) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+.archive-rope-binding::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: calc(50% + 3px);
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(139,90,43,0.25) 0px,
+    rgba(139,90,43,0.25) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  transform: translateY(2px);
+}
+
+/* Burnt reveal window — irregular torn shape */
+.archive-reveal {
+  position: relative;
+  overflow: hidden;
+  filter: drop-shadow(0 0 18px rgba(255,138,0,0.25));
+  transition: filter 0.5s ease;
+}
+.archive-record-card:hover .archive-reveal {
+  filter: drop-shadow(0 0 28px rgba(255,138,0,0.4));
+}
+.archive-reveal-mask {
+  clip-path: polygon(
+    8% 5%, 18% 2%, 28% 6%, 38% 1%, 48% 4%, 58% 0%, 68% 5%, 78% 2%, 88% 6%, 95% 3%,
+    98% 12%, 96% 22%, 99% 32%, 97% 42%, 100% 52%, 97% 62%, 99% 72%, 96% 82%, 98% 90%,
+    92% 95%, 82% 98%, 72% 94%, 62% 99%, 52% 96%, 42% 100%, 32% 96%, 22% 98%, 12% 94%, 5% 97%,
+    2% 88%, 4% 78%, 1% 68%, 3% 58%, 0% 48%, 3% 38%, 1% 28%, 4% 18%, 2% 10%
+  );
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.archive-record-card:hover .archive-reveal-mask {
+  transform: scale(1.04);
+}
+/* Ember glow ring around the torn opening */
+.archive-reveal::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  clip-path: polygon(
+    8% 5%, 18% 2%, 28% 6%, 38% 1%, 48% 4%, 58% 0%, 68% 5%, 78% 2%, 88% 6%, 95% 3%,
+    98% 12%, 96% 22%, 99% 32%, 97% 42%, 100% 52%, 97% 62%, 99% 72%, 96% 82%, 98% 90%,
+    92% 95%, 82% 98%, 72% 94%, 62% 99%, 52% 96%, 42% 100%, 32% 96%, 22% 98%, 12% 94%, 5% 97%,
+    2% 88%, 4% 78%, 1% 68%, 3% 58%, 0% 48%, 3% 38%, 1% 28%, 4% 18%, 2% 10%
+  );
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(255,138,0,0.12) 80%, rgba(180,60,0,0.18) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Timeline */
+.archive-timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(185,138,69,0.15) 5%,
+    rgba(185,138,69,0.4) 20%,
+    rgba(185,138,69,0.4) 80%,
+    rgba(185,138,69,0.15) 95%,
+    transparent
+  );
+  transform: translateX(-50%);
+}
+.archive-timeline-node {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-cinzel);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 12px rgba(185,138,69,0.1);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.archive-timeline-node:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 0 20px rgba(185,138,69,0.2);
+  transform: scale(1.08);
+}
+
+/* ── Parchment Input ── */
+.parchment-input {
+  width: 100%;
+  background: rgba(229,208,160,0.35);
+  border: 1px solid rgba(74,47,27,0.4);
+  border-radius: 3px;
+  padding: 12px 16px;
+  font-family: var(--font-cormorant);
+  font-size: 1rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.parchment-input:focus {
+  border-color: var(--gold);
+  background: rgba(229,208,160,0.5);
+}
+.parchment-input::placeholder {
+  color: rgba(42,27,18,0.45);
+  font-style: italic;
+}
+.input-label-hindi {
+  font-family: var(--font-devanagari);
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--brown);
+  opacity: 0.75;
+  margin-bottom: 1px;
+  display: block;
+}
+.input-label-en {
+  font-family: var(--font-cinzel);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--brown); border-radius: 3px; }
+
+/* ── Mobile: refined burn glow — matches desktop parchment appearance ── */
+@media (max-width: 767px) {
+  .burnt-edge-top,
+  .burnt-edge-bottom {
+    display: none !important;
+  }
+
+  .burnt-edge-left,
+  .burnt-edge-right {
+    display: none !important;
+  }
+
+  /* Subtle burn glow on mobile — matches desktop look, no dark patches */
+  .manuscript {
+    background-size: 400px auto;
+    background-position: top center;
+    box-shadow:
+      inset 0 0 60px rgba(255, 138, 0, 0.18),
+      inset 0 -40px 60px rgba(180, 60, 0, 0.12),
+      inset 0 40px 60px rgba(180, 60, 0, 0.12),
+      inset 30px 0 50px rgba(180, 60, 0, 0.10),
+      inset -30px 0 50px rgba(180, 60, 0, 0.10),
+      0 0 40px rgba(255, 138, 0, 0.10),
+      0 0 80px rgba(180, 60, 0, 0.06) !important;
+  }
+
+  /* Mobile section headings — prevent overflow */
+  .section-english {
+    font-size: clamp(1.3rem, 7vw, 2.8rem);
+    letter-spacing: 0.08em;
+    word-break: break-word;
+  }
+
+  /* Sanskrit overlay — smaller pattern on mobile */
+  .sanskrit-overlay {
+    background-size: 250px;
+  }
+
+  /* Larger touch targets */
+  .cta-link {
+    padding: 8px 0;
+    min-height: 44px;
+  }
+
+  .btn-dark {
+    min-height: 52px;
+    width: 100%;
+    max-width: 320px;
+    padding: 16px 28px;
+    font-size: 0.75rem;
+  }
+
+  /* Touch-friendly inputs */
+  .parchment-input {
+    min-height: 48px;
+    font-size: 16px; /* prevents iOS zoom on focus */
+    padding: 14px 16px;
+  }
+
+  /* Compact process/metric cards on mobile */
+  .process-archive-card {
+    padding: 20px 16px;
+  }
+
+  .metric-archive-card {
+    padding: 24px 16px;
+  }
+
+  /* Archive record card — vertical stack on mobile */
+  .archive-record-card .flex.flex-col.md\:flex-row {
+    flex-direction: column;
+  }
+
+  /* Mobile bottom padding */
+  main {
+    padding-bottom: 40px;
+  }
+
+  /* Ornament — smaller on mobile */
+  .ornament {
+    gap: 8px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ── Tablet ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .manuscript {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+/* ── Desktop: manuscript has max-width + dark surrounding ── */
+@media (min-width: 1024px) {
+  body {
+    background-color: var(--bg);
+  }
+  .manuscript {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+
+/* ── Manuscript Frame (Gold double-border) ── */
+.manuscript-frame {
+  position: relative;
+  padding: 8px;
+  background: rgba(229, 208, 160, 0.25);
+  border: 1px solid rgba(74, 47, 27, 0.22);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    inset 0 0 15px rgba(180, 60, 0, 0.05);
+}
+.manuscript-frame::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(185, 138, 69, 0.45);
+  pointer-events: none;
+}
+
+/* ── Process Archive Card ── */
+.process-archive-card {
+  background: rgba(229, 208, 160, 0.35);
+  background-image: url('/assets/shared/paper-bg.png');
+  background-size: cover;
+  border: 1px solid rgba(185, 138, 69, 0.35);
+  border-radius: 4px;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.45s ease;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.08),
+    inset 0 0 20px rgba(180, 60, 0, 0.04);
+}
+.process-archive-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(185, 138, 69, 0.7);
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.18),
+    0 0 20px rgba(255, 138, 0, 0.06),
+    inset 0 0 20px rgba(180, 60, 0, 0.06);
+}
+
+/* ── Metric Archive Card ── */
+.metric-archive-card {
+  background: rgba(229, 208, 160, 0.3);
+  background-image: url('/assets/shared/paper-bg.png');
+  background-size: cover;
+  border: 1px solid rgba(185, 138, 69, 0.28);
+  border-radius: 3px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  height: 100%;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    inset 0 0 15px rgba(180, 60, 0, 0.02);
+}
+

@@ -1,0 +1,26 @@
+<!-- public/assets/shared/burnt-hole-mask.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" preserveAspectRatio="none">
+  <defs>
+    <mask id="burnt-mask">
+      <!-- White = visible, Black = hidden -->
+      <!-- Outer black rectangle — ye part clip ho jaega -->
+      <rect width="400" height="320" fill="black"/>
+      <!-- Inner irregular burnt hole — ye part dikhega -->
+      <path d="
+        M 200 30
+        C 240 28, 290 40, 320 65
+        C 348 88, 368 118, 372 148
+        C 376 178, 368 212, 350 238
+        C 332 264, 305 282, 278 290
+        C 248 298, 215 298, 186 292
+        C 155 286, 125 270, 104 248
+        C 82 226, 66 196, 60 166
+        C 54 136, 56 103, 72 78
+        C 88 52, 118 34, 150 28
+        C 165 25, 182 28, 200 30 Z
+      " fill="white"/>
+    </mask>
+  </defs>
+  <!-- This rect with the mask IS the mask output -->
+  <rect width="400" height="320" fill="white" mask="url(#burnt-mask)"/>
+</svg>

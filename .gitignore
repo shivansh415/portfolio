@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# Temporary tools
+.kiro/
+
+# Unused files & layout references
+/public/mobile-reference-images/
+/public/reference-images/
+/claude.md
