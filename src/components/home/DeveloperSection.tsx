@@ -1,19 +1,21 @@
 // src/components/home/DeveloperSection.tsx
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { assets } from "@/data/assets";
 import { personal } from "@/data/personal";
-
+import FallbackImage from "@/components/shared/FallbackImage";
 
 const tools = [
-  { name: "React", icon: "/assets/skills/react.png" },
-  { name: "Next.js", icon: "/assets/skills/nextjs.png" },
-  { name: "GSAP", icon: "/assets/skills/gsap.png" },
-  { name: "Three.js", icon: "/assets/skills/threejs.png" },
-  { name: "Framer Motion", icon: "/assets/skills/framer-motion.png" },
-  { name: "Tailwind CSS", icon: "/assets/skills/tailwind.png" },
-  { name: "TypeScript", icon: "/assets/skills/typescript.png" },
-  { name: "WebGL", icon: "/assets/skills/webgl.png" },
+  { name: "React", icon: "/assets/skills/react.webp" },
+  { name: "Next.js", icon: "/assets/skills/nextjs.webp" },
+  { name: "GSAP", icon: "/assets/skills/gsap.webp" },
+  { name: "Three.js", icon: "/assets/skills/threejs.webp" },
+  { name: "Framer Motion", icon: "/assets/skills/framer-motion.webp" },
+  { name: "Tailwind CSS", icon: "/assets/skills/tailwind.webp" },
+  { name: "TypeScript", icon: "/assets/skills/typescript.webp" },
+  { name: "WebGL", icon: "/assets/skills/webgl.webp" },
 ];
 
 export default function DeveloperSection() {
@@ -150,13 +152,14 @@ export default function DeveloperSection() {
                   }}
                   className="group-hover:bg-[rgba(185,138,69,0.15)] group-hover:border-[var(--gold)]"
                 >
-                  <Image
+                  <FallbackImage
                     src={tool.icon}
                     alt={tool.name}
                     width={32}
                     height={32}
                     className="object-contain"
                     style={{ mixBlendMode: "multiply" }}
+                    fallbackText={tool.name}
                   />
                 </div>
                 <span

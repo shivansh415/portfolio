@@ -240,7 +240,7 @@ export default function WorkPage() {
         </div>
       </section>
       {/* Spacer to prevent fixed bottom navigation overlap on mobile */}
-      <div className="h-28 w-full shrink-0 md:hidden" />
+      <div className="h-40 w-full shrink-0 md:hidden" />
     </ManuscriptContainer>
   );
 }

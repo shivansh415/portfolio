@@ -152,7 +152,7 @@ body {
 /* ── Sacred Geometry Overlay ── */
 .geometry-overlay {
   position: absolute;
-  background-image: url('/assets/shared/geometry.png');
+  background-image: url('/assets/shared/geometry.webp');
   background-repeat: no-repeat;
   background-size: contain;
   opacity: 0.18;
@@ -164,7 +164,7 @@ body {
 .sanskrit-overlay {
   position: absolute;
   inset: 0;
-  background-image: url('/assets/shared/sanskrit-overlay.png');
+  background-image: url('/assets/shared/sanskrit-overlay.webp');
   background-size: 400px;
   background-repeat: repeat;
   opacity: 0.10;
@@ -349,7 +349,7 @@ body {
 .archive-record-card {
   position: relative;
   background: rgba(229,208,160,0.35);
-  background-image: url('/assets/shared/paper-bg.png');
+  background-image: url('/assets/shared/paper-bg.webp');
   background-size: cover;
   border: 1px solid rgba(185,138,69,0.3);
   border-radius: 3px;

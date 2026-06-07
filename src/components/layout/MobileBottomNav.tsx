@@ -12,8 +12,9 @@ export default function MobileBottomNav() {
 
   return (
     <nav
-      className="md:hidden fixed bottom-0 left-1/2 -translate-x-1/2 z-50 h-[74px] w-full max-w-[480px] grid grid-cols-5 items-center shadow-[0_-8px_24px_rgba(0,0,0,0.4)]"
+      className="md:hidden fixed bottom-0 left-1/2 -translate-x-1/2 z-50 w-full max-w-[480px] grid grid-cols-5 items-center shadow-[0_-8px_24px_rgba(0,0,0,0.4)] pb-[env(safe-area-inset-bottom)]"
       style={{
+        height: "calc(74px + env(safe-area-inset-bottom))",
         background: "linear-gradient(180deg, #1c110b 0%, #080402 100%)",
         borderTop: "2.5px solid var(--gold)",
       }}
@@ -21,7 +22,7 @@ export default function MobileBottomNav() {
       {/* Tab: Home */}
       <Link
         href="/"
-        className={`flex flex-col items-center justify-center gap-1 w-full h-full transition-colors ${
+        className={`flex flex-col items-center justify-center gap-1 w-full h-[74px] transition-colors ${
           pathname === "/" ? "text-[var(--gold)]" : "text-[#faf6ee]/65"
         }`}
         style={{ textDecoration: "none" }}
@@ -42,7 +43,7 @@ export default function MobileBottomNav() {
       {/* Tab: Works */}
       <Link
         href="/work"
-        className={`flex flex-col items-center justify-center gap-1 w-full h-full transition-colors ${
+        className={`flex flex-col items-center justify-center gap-1 w-full h-[74px] transition-colors ${
           pathname === "/work" || pathname.startsWith("/work/") ? "text-[var(--gold)]" : "text-[#faf6ee]/65"
         }`}
         style={{ textDecoration: "none" }}
@@ -61,7 +62,7 @@ export default function MobileBottomNav() {
       </Link>
 
       {/* Medallion (Center Scroll/Quill Action) overlapping naturally */}
-      <div className="relative flex justify-center items-center w-full h-full">
+      <div className="relative flex justify-center items-center w-full h-[74px]">
         <Link
           href="/contact"
           className="absolute -top-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all"
@@ -87,7 +88,7 @@ export default function MobileBottomNav() {
       {/* Tab: Developer */}
       <Link
         href="/about"
-        className={`flex flex-col items-center justify-center gap-1 w-full h-full transition-colors ${
+        className={`flex flex-col items-center justify-center gap-1 w-full h-[74px] transition-colors ${
           pathname === "/about" ? "text-[var(--gold)]" : "text-[#faf6ee]/65"
         }`}
         style={{ textDecoration: "none" }}
@@ -108,7 +109,7 @@ export default function MobileBottomNav() {
       {/* Tab: Contact */}
       <Link
         href="/contact"
-        className={`flex flex-col items-center justify-center gap-1 w-full h-full transition-colors ${
+        className={`flex flex-col items-center justify-center gap-1 w-full h-[74px] transition-colors ${
           pathname === "/contact" ? "text-[var(--gold)]" : "text-[#faf6ee]/65"
         }`}
         style={{ textDecoration: "none" }}

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shivansh Patidar — Creative Frontend Developer",
     description: "An ancient archive of immersive digital creations.",
-    images: ["/assets/home/hero-palace.png"],
+    images: ["/assets/home/hero-palace.webp"],
   },
 };
 

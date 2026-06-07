@@ -9,6 +9,7 @@ import { personal } from "@/data/personal";
 import { featuredProjects } from "@/data/projects";
 import { Home, BookOpen, User, Mail } from "lucide-react";
 import LazySection from "@/components/shared/LazySection";
+import FallbackImage from "@/components/shared/FallbackImage";
 
 // Inline SVG Icons representing the "Tools of Creation" drawn in brown line art.
 function ReactIcon() {
@@ -346,12 +347,13 @@ export default function MobileHomePage() {
                   {/* Inner decorative border line */}
                   <div className="absolute inset-0.5 border border-amber-900/25" />
                   <div className="relative w-full h-full overflow-hidden border border-amber-900/15">
-                    <Image
-                      src="/assets/about/about-hero.png"
+                    <FallbackImage
+                      src="/assets/about/about-hero.webp"
                       alt="Shivansh Patidar"
                       fill
                       className="object-cover object-center"
                       sizes="30vw"
+                      fallbackText="Shivansh Patidar"
                     />
                   </div>
                 </div>
