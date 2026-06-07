@@ -41,8 +41,8 @@ export const projects: Project[] = [
       timeOnSite: "+48%",
       conversion: "+35%",
     },
-    heroImage: "/assets/projects/one-tab-hero.png",
-    thumbImage: "/assets/home/One-tab-thumb.png",
+    heroImage: "/assets/projects/one-tab-hero.webp",
+    thumbImage: "/assets/home/One-tab-thumb.webp",
   },
   {
     id: "shell-elearning",
@@ -64,8 +64,8 @@ export const projects: Project[] = [
       timeOnSite: "+40%",
       conversion: "+28%",
     },
-    heroImage: "/assets/projects/Shell-E-learning-hero.png",
-    thumbImage: "/assets/home/Shell-E-learn-thumb.png",
+    heroImage: "/assets/projects/Shell-E-learning-hero.webp",
+    thumbImage: "/assets/home/Shell-E-learn-thumb.webp",
   },
   {
     id: "luxe-estate",
@@ -87,8 +87,8 @@ export const projects: Project[] = [
       timeOnSite: "+55%",
       conversion: "+42%",
     },
-    heroImage: "/assets/projects/luxe-estate-hero.png",
-    thumbImage: "/assets/home/Luxe-estate-thumb.png",
+    heroImage: "/assets/projects/luxe-estate-hero.webp",
+    thumbImage: "/assets/home/Luxe-estate-thumb.webp",
   },
   {
     id: "mahakal-property",
@@ -110,8 +110,8 @@ export const projects: Project[] = [
       timeOnSite: "+38%",
       conversion: "+30%",
     },
-    heroImage: "/assets/projects/Mahakal-property-hero.png",
-    thumbImage: "/assets/home/mahakal-property-thumb.png",
+    heroImage: "/assets/projects/Mahakal-property-hero.webp",
+    thumbImage: "/assets/home/mahakal-property-thumb.webp",
   },
   {
     id: "spa-vibe",
@@ -133,8 +133,8 @@ export const projects: Project[] = [
       timeOnSite: "+44%",
       conversion: "+33%",
     },
-    heroImage: "/assets/projects/Spa-vibe-hero.png",
-    thumbImage: "/assets/home/spa-vibe-thumb.png",
+    heroImage: "/assets/projects/Spa-vibe-hero.webp",
+    thumbImage: "/assets/home/spa-vibe-thumb.webp",
   },
 ];
 

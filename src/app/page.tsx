@@ -1,10 +1,13 @@
 // src/app/page.tsx
 import type { Metadata } from "next";
-import HeroSection from "@/components/home/HeroSection";
-import SelectedWorks from "@/components/home/SelectedWorks";
-import DeveloperSection from "@/components/home/DeveloperSection";
-import CtaSection from "@/components/home/CtaSection";
+import dynamic from "next/dynamic";
 import ManuscriptContainer from "@/components/shared/ManuscriptContainer";
+
+const HeroSection = dynamic(() => import("@/components/home/HeroSection"));
+const SelectedWorks = dynamic(() => import("@/components/home/SelectedWorks"));
+const DeveloperSection = dynamic(() => import("@/components/home/DeveloperSection"));
+const CtaSection = dynamic(() => import("@/components/home/CtaSection"));
+const MobileHomePage = dynamic(() => import("@/components/home/MobileHomePage"));
 
 export const metadata: Metadata = {
   title: "शिवांश | Shivansh Patidar — Creative Frontend Developer",
@@ -25,8 +28,6 @@ export const metadata: Metadata = {
     images: ["/assets/home/hero-palace.png"],
   },
 };
-
-import MobileHomePage from "@/components/home/MobileHomePage";
 
 export default function HomePage() {
   return (

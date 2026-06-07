@@ -5,6 +5,43 @@ import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import SocialSidebar from "@/components/layout/SocialSidebar";
 import LenisProvider from "@/components/layout/LenisProvider";
 import PageTransition from "@/components/layout/PageTransition";
+import { Yatra_One, Cinzel, Cormorant_Garamond, Noto_Sans_Devanagari, IM_Fell_English_SC } from "next/font/google";
+
+const yatraOne = Yatra_One({
+  weight: "400",
+  subsets: ["latin", "devanagari"],
+  variable: "--font-hindi",
+  display: "swap",
+});
+
+const cinzel = Cinzel({
+  weight: ["400", "600", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-cinzel",
+  display: "swap",
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  weight: ["300", "400", "600"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const notoSansDevanagari = Noto_Sans_Devanagari({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin", "devanagari"],
+  variable: "--font-devanagari",
+  display: "swap",
+});
+
+const imFellEnglishSC = IM_Fell_English_SC({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-fell",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "शिवांश | Shivansh — Creative Frontend Developer",
@@ -24,15 +61,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hi">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-      </head>
-      <body suppressHydrationWarning>
+      <body
+        className={`${yatraOne.variable} ${cinzel.variable} ${cormorantGaramond.variable} ${notoSansDevanagari.variable} ${imFellEnglishSC.variable}`}
+        suppressHydrationWarning
+      >
         <LenisProvider>
           {/* Desktop only: fixed top nav */}
           <Navbar />

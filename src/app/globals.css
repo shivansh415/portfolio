@@ -1,6 +1,5 @@
 /* src/app/globals.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Yatra+One&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=IM+Fell+English+SC&display=swap');
 @import "tailwindcss";
 
 /* ── Tailwind v4 Theme Tokens (CSS-first config; no tailwind.config.ts) ── */
@@ -16,11 +15,11 @@
   --color-site-bg:      #0F0B08;
   --color-wax:          #5C1A1A;
 
-  --font-hindi:      "Yatra One", serif;
-  --font-cinzel:     "Cinzel", serif;
-  --font-cormorant:  "Cormorant Garamond", serif;
-  --font-devanagari: "Noto Sans Devanagari", sans-serif;
-  --font-fell:       "IM Fell English SC", serif;
+  --font-hindi:      var(--font-hindi);
+  --font-cinzel:     var(--font-cinzel);
+  --font-cormorant:  var(--font-cormorant);
+  --font-devanagari: var(--font-devanagari);
+  --font-fell:       var(--font-fell);
 }
 
 :root {
@@ -39,11 +38,11 @@
   --wax-dark:       #3D0F0F;
 
   /* ── Typography ── */
-  --font-hindi:       'Yatra One', serif;
-  --font-cinzel:      'Cinzel', serif;
-  --font-cormorant:   'Cormorant Garamond', serif;
-  --font-devanagari:  'Noto Sans Devanagari', sans-serif;
-  --font-fell:        'IM Fell English SC', serif;
+  --font-hindi:       var(--font-hindi), "Yatra One", serif;
+  --font-cinzel:      var(--font-cinzel), "Cinzel", serif;
+  --font-cormorant:   var(--font-cormorant), "Cormorant Garamond", serif;
+  --font-devanagari:  var(--font-devanagari), "Noto Sans Devanagari", sans-serif;
+  --font-fell:        var(--font-fell), "IM Fell English SC", serif;
 }
 
 *, *::before, *::after {
@@ -71,7 +70,7 @@ body {
 /* ── Manuscript Base ── */
 .manuscript {
   background-color: var(--paper);
-  background-image: url('/assets/shared/paper-bg.png');
+  background-image: url('/assets/shared/paper-bg.webp');
   background-size: cover;
   background-repeat: repeat;
   position: relative;
@@ -93,7 +92,7 @@ body {
   left: 0;
   right: 0;
   height: 180px;
-  background-image: url('/assets/shared/burnt-edge-desktop.png');
+  background-image: url('/assets/shared/burnt-edge-desktop.webp');
   background-size: 100% 100%;
   pointer-events: none;
   z-index: 5;
@@ -684,7 +683,7 @@ body {
 /* ── Process Archive Card ── */
 .process-archive-card {
   background: rgba(229, 208, 160, 0.35);
-  background-image: url('/assets/shared/paper-bg.png');
+  background-image: url('/assets/shared/paper-bg.webp');
   background-size: cover;
   border: 1px solid rgba(185, 138, 69, 0.35);
   border-radius: 4px;
@@ -714,7 +713,7 @@ body {
 /* ── Metric Archive Card ── */
 .metric-archive-card {
   background: rgba(229, 208, 160, 0.3);
-  background-image: url('/assets/shared/paper-bg.png');
+  background-image: url('/assets/shared/paper-bg.webp');
   background-size: cover;
   border: 1px solid rgba(185, 138, 69, 0.28);
   border-radius: 3px;
@@ -728,5 +727,31 @@ body {
   box-shadow: 
     0 4px 12px rgba(0, 0, 0, 0.05),
     inset 0 0 15px rgba(180, 60, 0, 0.02);
+}
+
+/* ── Hardware Acceleration & Animation Optimization ── */
+.will-animate-transform {
+  will-change: transform;
+}
+.will-animate-opacity {
+  will-change: opacity;
+}
+.will-animate-both {
+  will-change: transform, opacity;
+}
+
+/* ── Accessibility: Prefers Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
 }
 

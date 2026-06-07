@@ -8,6 +8,7 @@ import { assets } from "@/data/assets";
 import { personal } from "@/data/personal";
 import { featuredProjects } from "@/data/projects";
 import { Home, BookOpen, User, Mail } from "lucide-react";
+import LazySection from "@/components/shared/LazySection";
 
 // Inline SVG Icons representing the "Tools of Creation" drawn in brown line art.
 function ReactIcon() {
@@ -200,7 +201,8 @@ export default function MobileHomePage() {
       </section>
 
       {/* ── 2. SELECTED WORKS SECTION ── */}
-      <section className="w-full py-4 flex flex-col gap-6 border-t border-amber-900/10">
+      <LazySection minHeight="600px" className="w-full">
+        <section className="w-full py-4 flex flex-col gap-6 border-t border-amber-900/10">
         <div className="text-center flex flex-col items-center gap-0.5">
           <h2
             style={{
@@ -314,10 +316,12 @@ export default function MobileHomePage() {
             </div>
           </Link>
         </div>
-      </section>
+        </section>
+      </LazySection>
 
       {/* ── 3. DEVELOPER SECTION ── */}
-      <section className="w-full py-4 flex flex-col gap-6 border-t border-amber-900/10">
+      <LazySection minHeight="250px" className="w-full">
+        <section className="w-full py-4 flex flex-col gap-6 border-t border-amber-900/10">
         <div className="text-center">
           <h2
             style={{
@@ -403,10 +407,12 @@ export default function MobileHomePage() {
             </Link>
           </div>
         </div>
-      </section>
+        </section>
+      </LazySection>
 
       {/* ── 4. TOOLS OF CREATION ── */}
-      <section className="w-full py-4 flex flex-col gap-6 border-t border-amber-900/10">
+      <LazySection minHeight="400px" className="w-full">
+        <section className="w-full py-4 flex flex-col gap-6 border-t border-amber-900/10">
         <div className="text-center">
           <h2
             style={{
@@ -467,10 +473,12 @@ export default function MobileHomePage() {
           </Link>
           <span className="text-[0.6rem] text-amber-900/40">✦</span>
         </div>
-      </section>
+        </section>
+      </LazySection>
 
       {/* ── 5. CTA SECTION ── */}
-      <section className="w-full py-14 flex flex-col gap-6 border-t border-amber-900/15 text-center">
+      <LazySection minHeight="250px" className="w-full">
+        <section className="w-full py-14 flex flex-col gap-6 border-t border-amber-900/15 text-center">
         <div className="flex flex-col gap-2 w-full">
           <h2
             style={{
@@ -535,7 +543,8 @@ export default function MobileHomePage() {
             </button>
           </Link>
         </div>
-      </section>
+        </section>
+      </LazySection>
 
       {/* Spacer to prevent fixed bottom navigation overlap */}
       <div className="h-44 w-full shrink-0" />
