@@ -5,6 +5,8 @@ import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import SocialSidebar from "@/components/layout/SocialSidebar";
 import LenisProvider from "@/components/layout/LenisProvider";
 import PageTransition from "@/components/layout/PageTransition";
+import { AmbientAudioProvider } from "@/components/audio/AmbientAudioProvider";
+import DesktopSoundToggle from "@/components/audio/DesktopSoundToggle";
 import { Yatra_One, Cinzel, Cormorant_Garamond, Noto_Sans_Devanagari, IM_Fell_English_SC } from "next/font/google";
 
 const yatraOne = Yatra_One({
@@ -66,16 +68,20 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <LenisProvider>
-          {/* Desktop only: fixed top nav */}
-          <Navbar />
-          {/* Mobile only: bottom tab navigation */}
-          <MobileBottomNav />
-          {/* Desktop only: right sidebar social icons */}
-          <SocialSidebar />
-          {/* Page content with transitions */}
-          <PageTransition>
-            <main>{children}</main>
-          </PageTransition>
+          <AmbientAudioProvider>
+            {/* Desktop only: fixed top nav */}
+            <Navbar />
+            {/* Desktop only: floating ambient sound control */}
+            <DesktopSoundToggle />
+            {/* Mobile only: bottom tab navigation */}
+            <MobileBottomNav />
+            {/* Desktop only: right sidebar social icons */}
+            <SocialSidebar />
+            {/* Page content with transitions */}
+            <PageTransition>
+              <main>{children}</main>
+            </PageTransition>
+          </AmbientAudioProvider>
         </LenisProvider>
       </body>
     </html>

@@ -5,10 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { assets } from "@/data/assets";
-import { Home, BookOpen, User, Mail } from "lucide-react";
+import { Home, BookOpen, User, Volume2, VolumeX } from "lucide-react";
+import { useAmbientAudio } from "@/components/audio/AmbientAudioProvider";
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
+  const { enabled, toggle } = useAmbientAudio();
+  const SoundIcon = enabled ? Volume2 : VolumeX;
+  const soundLabel = enabled ? "Sound On" : "Sound Off";
 
   return (
     <nav
@@ -22,6 +26,7 @@ export default function MobileBottomNav() {
       {/* Tab: Home */}
       <Link
         href="/"
+        aria-label="Home"
         className={`flex flex-col items-center justify-center gap-1 w-full h-[74px] transition-colors ${
           pathname === "/" ? "text-[var(--gold)]" : "text-[#faf6ee]/65"
         }`}
@@ -43,6 +48,7 @@ export default function MobileBottomNav() {
       {/* Tab: Works */}
       <Link
         href="/work"
+        aria-label="Works"
         className={`flex flex-col items-center justify-center gap-1 w-full h-[74px] transition-colors ${
           pathname === "/work" || pathname.startsWith("/work/") ? "text-[var(--gold)]" : "text-[#faf6ee]/65"
         }`}
@@ -65,6 +71,7 @@ export default function MobileBottomNav() {
       <div className="relative flex justify-center items-center w-full h-[74px]">
         <Link
           href="/contact"
+          aria-label="Contact"
           className="absolute -top-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all"
           style={{
             background: "radial-gradient(circle, #e5c080 0%, #b98a45 70%, #8a5a1f 100%)",
@@ -88,6 +95,7 @@ export default function MobileBottomNav() {
       {/* Tab: Developer */}
       <Link
         href="/about"
+        aria-label="Developer"
         className={`flex flex-col items-center justify-center gap-1 w-full h-[74px] transition-colors ${
           pathname === "/about" ? "text-[var(--gold)]" : "text-[#faf6ee]/65"
         }`}
@@ -106,15 +114,18 @@ export default function MobileBottomNav() {
         </span>
       </Link>
 
-      {/* Tab: Contact */}
-      <Link
-        href="/contact"
-        className={`flex flex-col items-center justify-center gap-1 w-full h-[74px] transition-colors ${
-          pathname === "/contact" ? "text-[var(--gold)]" : "text-[#faf6ee]/65"
+      {/* Tab: Ambient Sound */}
+      <button
+        type="button"
+        onClick={toggle}
+        aria-label={`Ambient Experience: ${soundLabel}`}
+        aria-pressed={enabled}
+        className={`flex flex-col items-center justify-center gap-1 w-full h-[74px] transition-colors outline-none focus-visible:text-[var(--gold-light)] ${
+          enabled ? "text-[var(--gold)]" : "text-[#faf6ee]/65"
         }`}
         style={{ textDecoration: "none" }}
       >
-        <Mail className="w-[19px] h-[19px]" />
+        <SoundIcon className="w-[19px] h-[19px]" />
         <span
           style={{
             fontFamily: "var(--font-cinzel)",
@@ -123,9 +134,9 @@ export default function MobileBottomNav() {
             letterSpacing: "0.08em",
           }}
         >
-          Contact
+          Sound
         </span>
-      </Link>
+      </button>
     </nav>
   );
 }
