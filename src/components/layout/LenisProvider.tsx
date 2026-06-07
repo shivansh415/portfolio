@@ -1,12 +1,7 @@
 // src/components/layout/LenisProvider.tsx
 // Client component — initializes Lenis smooth scroll and DRIVES IT FROM THE
 // GSAP TICKER (a single requestAnimationFrame loop shared with GSAP), keeping
-// Lenis and ScrollTrigger in sync. See claude.md Section 15 + 23.1 and
-// Requirement 9.2.
-//
-// Why drive from the GSAP ticker (not Lenis's own raf loop): running smooth
-// scroll and ScrollTrigger off a single RAF avoids competing animation frames
-// and keeps scroll-driven animations perfectly in step with the scroll value.
+// Lenis and ScrollTrigger in sync.
 //
 // SSR safety: Lenis touches `window`/`document`, so all browser work happens
 // inside useEffect (client only) behind a `typeof window` guard. ScrollTrigger
@@ -17,7 +12,8 @@
 // entirely and fall back to native scrolling.
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 // Lenis's recommended stylesheet (sets html/body sizing + scroll behaviour).
@@ -30,6 +26,9 @@ export default function LenisProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
     // SSR guard: never construct Lenis or touch matchMedia on the server.
     if (typeof window === "undefined") return;
@@ -42,9 +41,12 @@ export default function LenisProvider({
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      lerp: 0.1,
+      lerp: 0.08, // Premium smooth damping feel
       smoothWheel: true,
+      syncTouch: false, // Keep mobile touch native for responsiveness and native kinetic feel
     });
+
+    lenisRef.current = lenis;
 
     // Keep ScrollTrigger's calculations in sync with every Lenis scroll frame.
     lenis.on("scroll", ScrollTrigger.update);
@@ -61,8 +63,34 @@ export default function LenisProvider({
     return () => {
       gsap.ticker.remove(tick);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // Listen to pathname changes to reset scroll position and refresh triggers
+  useEffect(() => {
+    if (lenisRef.current) {
+      // Reset scroll position to top instantly via Lenis
+      lenisRef.current.scrollTo(0, { immediate: true });
+    } else {
+      // Fallback for native/reduced motion scrolling
+      window.scrollTo(0, 0);
+    }
+
+    // Refresh ScrollTrigger calculations after route transition completes
+    // and elements settle down to prevent offset jank.
+    ScrollTrigger.refresh();
+
+    const t1 = setTimeout(() => ScrollTrigger.refresh(), 100);
+    const t2 = setTimeout(() => ScrollTrigger.refresh(), 300);
+    const t3 = setTimeout(() => ScrollTrigger.refresh(), 700); // Wait for AnimatePresence unfold (0.65s) to finish
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [pathname]);
 
   return <>{children}</>;
 }
